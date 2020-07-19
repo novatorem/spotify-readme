@@ -1,4 +1,5 @@
-.vercel
+venv
+__pycache__
+.cache*
+env
 .env
-node_modules
-.DS_STORE
