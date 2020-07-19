@@ -1,20 +1,16 @@
-import { renderToString } from "react-dom/server";
+import { renderToString } from 'react-dom/server';
 import { NowRequest, NowResponse } from "@vercel/node";
-import { decode } from "querystring";
+import { decode } from 'querystring';
 import { nowPlaying } from "../utils/spotify";
-import { Player } from "../components/NowPlaying";
+import { Player } from '../components/NowPlaying';
 
 
 export default async function (req: NowRequest, res: NowResponse) {
-  const { 
-    item = {}, 
-    is_playing: isPlaying = false, 
-    progress_ms: progress = 0,
- } = await nowPlaying();
+  const { item = {}, is_playing: isPlaying = false, progress_ms: progress = 0 } = await nowPlaying();
 
-  const params = decode(req.url.split("?")[1]) as any;
+  const params = decode(req.url.split('?')[1]) as any;
   
-  if (params && typeof params.open !== "undefined") {
+  if (params && typeof params.open !== 'undefined') {
     if (item && item.external_urls) {
       res.writeHead(302, {
         Location: item.external_urls.spotify,
@@ -43,7 +39,7 @@ export default async function (req: NowRequest, res: NowResponse) {
     )}`;
   }
 
-  const artist = (item.artists || []).map(({ name }) => name).join(", ");
+  const artist = (item.artists || []).map(({ name }) => name).join(', ');
   const text = renderToString(
     Player({ cover: coverImg, artist, track, isPlaying, progress, duration })
   );
