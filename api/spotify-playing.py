@@ -75,7 +75,7 @@ def get_now_playing():
     return repsonse_json
 
 
-def generate_css_bar(num_bar=75):
+def generate_css_bar(num_bar=80):
     css_bar = ""
     left = 1
     for i in range(1, num_bar + 1):
