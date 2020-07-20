@@ -1,5 +1,5 @@
-<svg width="600" height="{{height}}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <foreignObject width="600" height="{{height}}">
+<svg width="600" height="233" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <foreignObject width="600" height="233">
         <div xmlns="http://www.w3.org/1999/xhtml" class="container">
             <style>
                 div {
@@ -10,15 +10,10 @@
                     display: flex;
                 }
 
-                .art {
-                    float: left;
-                    width: 40%;
-                }
-
                 .container {
                     background-color: #121212;
-                    border-radius: 10px;
-                    padding: 10px 10px
+                    border-radius: 5px;
+                    padding: 10px 10px 10px 0px;
                 }
 
                 .playing {
@@ -46,7 +41,7 @@
                     font-size: 20px;
                     color: #b3b3b3;
                     text-align: left;
-                    margin-top: 15px;
+                    margin-top: 45px;
                     margin-bottom: 15px;
                 }
 
@@ -56,13 +51,15 @@
                 }
 
                 .cover {
+                    float: left;
+                    width: 44%;
+                    margin-left: -15px;
                     border-radius: 5px;
-                    margin-top: 9px;
                 }
 
                 #bars {
                     height: 30px;
-                    bottom: 1px;
+                    bottom: 23px;
                     margin: -20px 0 0 0px;
                     position: absolute;
                     width: 40px;
@@ -95,7 +92,7 @@
             {% if song_name %}
 
             <div class="main">
-                <a class="art" href="{}" target="_BLANK">
+                <a href="{}" target="_BLANK">
                     <center>
                             <img src="data:image/png;base64, {{img}}" width="200" height="200" class="cover" />
                     </center>
