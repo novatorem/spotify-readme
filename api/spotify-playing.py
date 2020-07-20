@@ -42,7 +42,7 @@ def refresh_token():
 
     response = requests.post(SPOTIFY_URL_REFRESH_TOKEN, data=data, headers=headers)
     repsonse_json = response.json()
-
+    print(repsonse_json)
     return repsonse_json["access_token"]
 
 
