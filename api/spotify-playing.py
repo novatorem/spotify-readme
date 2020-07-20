@@ -42,7 +42,6 @@ def refresh_token():
 
     response = requests.post(SPOTIFY_URL_REFRESH_TOKEN, data=data, headers=headers)
     repsonse_json = response.json()
-    print(repsonse_json)
     return repsonse_json["access_token"]
 
 
@@ -106,7 +105,7 @@ def make_svg(data):
 
     if data == {}:
         # Get recently play
-        title_text = "Currently playing"
+        title_text = "Last listening to"
         content_bar = ""
 
         recent_plays = get_recently_play()
