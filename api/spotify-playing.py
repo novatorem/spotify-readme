@@ -97,8 +97,8 @@ def makeSVG(data):
         item = data["item"]
 
     img = loadImageB64(item["album"]["images"][1]["url"])
-    artist_name = item["artists"][0]["name"].replace("&", "&amp;")
-    song_name = item["name"].replace("&", "&amp;")
+    artist_name = item["artists"][0]["name"]
+    song_name = item["name"]
     url = item["external_urls"]["spotify"]
 
     rendered_data = {
