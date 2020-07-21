@@ -63,10 +63,10 @@ def nowPlaying():
 
     return response.json()
 
-def barGen(num_bar=85):
+def barGen(barCount=85):
     barCSS = ""
     left = 1
-    for i in range(1, num_bar + 1):
+    for i in range(1, barCount + 1):
 
         anim = random.randint(350, 500)
         barCSS += ".bar:nth-child({})  {{ left: {}px; animation-duration: {}ms; }}".format(
@@ -83,9 +83,9 @@ def loadImageB64(url):
 def makeSVG(data):
 
     height = 445
-    num_bar = 85
-    content_bar = "".join(["<div class='bar'></div>" for i in range(num_bar)])
-    css_bar = barGen(num_bar)
+    barCount = 85
+    contentBar = "".join(["<div class='bar'></div>" for i in range(barCount)])
+    barCSS = barGen(barCount)
 
     if data == {}:
         content_bar = ""
@@ -97,22 +97,21 @@ def makeSVG(data):
         item = data["item"]
 
     img = loadImageB64(item["album"]["images"][1]["url"])
-    artist_name = item["artists"][0]["name"].replace("&", "&amp;")
-    song_name = item["name"].replace("&", "&amp;")
+    artistName = item["artists"][0]["name"].replace("&", "&amp;")
+    songName = item["name"].replace("&", "&amp;")
     url = item["external_urls"]["spotify"]
 
-    rendered_data = {
+    dataDict = {
         "height": height,
-        "num_bar": num_bar,
-        "content_bar": content_bar,
-        "css_bar": css_bar,
-        "artist_name": artist_name,
-        "song_name": song_name,
-        "content_bar": content_bar,
+        "num_bar": barCount,
+        "content_bar": contentBar,
+        "css_bar": barCSS,
+        "artist_name": artistName,
+        "song_name": songName,
         "img": img,
     }
 
-    return render_template("spotify.html.j2", **rendered_data)
+    return render_template("spotify.html.j2", **dataDict)
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
