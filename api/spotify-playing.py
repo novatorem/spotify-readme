@@ -23,12 +23,10 @@ app = Flask(__name__)
 
 
 def getAuth():
-
     return b64encode(f"{SPOTIFY_CLIENT_ID}:{SPOTIFY_SECRET_ID}".encode()).decode("ascii")
 
 
 def refreshToken():
-
     data = {
         "grant_type": "refresh_token",
         "refresh_token": SPOTIFY_REFRESH_TOKEN,
@@ -39,8 +37,7 @@ def refreshToken():
     response = requests.post(SPOTIFY_URL_REFRESH_TOKEN, data=data, headers=headers)
     return response.json()["access_token"]
 
-def get_recently_play():
-
+def recentlyPlayed():
     token = refreshToken()
     headers = {"Authorization": f"Bearer {token}"}
     response = requests.get(SPOTIFY_URL_RECENTLY_PLAY, headers=headers)
@@ -67,8 +64,7 @@ def barGen(barCount=85):
     barCSS = ""
     left = 1
     for i in range(1, barCount + 1):
-
-        anim = random.randint(350, 500)
+        anim = random.randint(1000, 1350)
         barCSS += ".bar:nth-child({})  {{ left: {}px; animation-duration: {}ms; }}".format(
             i, left, anim
         )
@@ -81,15 +77,13 @@ def loadImageB64(url):
     return b64encode(resposne.content).decode("ascii")
 
 def makeSVG(data):
-
-    height = 445
-    barCount = 85
+    barCount = 82
     contentBar = "".join(["<div class='bar'></div>" for i in range(barCount)])
     barCSS = barGen(barCount)
 
     if data == {}:
         content_bar = ""
-        recent_plays = get_recently_play()
+        recent_plays = recentlyPlayed()
         size_recent_play = len(recent_plays["items"])
         idx = random.randint(0, size_recent_play - 1)
         item = recent_plays["items"][idx]["track"]
@@ -99,11 +93,8 @@ def makeSVG(data):
     img = loadImageB64(item["album"]["images"][1]["url"])
     artistName = item["artists"][0]["name"].replace("&", "&amp;")
     songName = item["name"].replace("&", "&amp;")
-    url = item["external_urls"]["spotify"]
 
     dataDict = {
-        "height": height,
-        "num_bar": barCount,
         "content_bar": contentBar,
         "css_bar": barCSS,
         "artist_name": artistName,
