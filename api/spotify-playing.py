@@ -60,7 +60,7 @@ def nowPlaying():
 
     return response.json()
 
-def barGen(barCount=85):
+def barGen(barCount):
     barCSS = ""
     left = 1
     for i in range(1, barCount + 1):
@@ -77,7 +77,7 @@ def loadImageB64(url):
     return b64encode(resposne.content).decode("ascii")
 
 def makeSVG(data):
-    barCount = 82
+    barCount = 90
     contentBar = "".join(["<div class='bar'></div>" for i in range(barCount)])
     barCSS = barGen(barCount)
 
